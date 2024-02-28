@@ -1,0 +1,221 @@
+{
+    "_version": "1.37.0",
+    "sap.app": {
+        "id": "sap.ui5.odata.projectodata2",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:worklist",
+            "version": "1.12.4",
+            "toolsId": "e1bdb662-665b-4dab-87ab-9878d1924216"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/V2/(S(blsltab3ia0sglrubjphuks2))/OData/OData.svc/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.96.28",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.f": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.collaboration": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "sap.ui5.odata.projectodata2.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [],
+            "targets": {}
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+                        "controllerName": "sap.ui5.odata.projectodata2.ext.controller.ListReportExt",
+                        "sap.ui.generic.app": {
+                            "Categories": {
+                                "EntitySet": "Categories",
+                                "Actions": {
+                                    "idManeiro": {
+                                        "id": "idManeiroButton",
+                                        "text": "{@i18n>button}",
+                                        "press": "funcaoTeste",
+                                        "requiresSelection": true,
+                                        "logicalAction": "REPLACE_WITH_LOGICAL_ACTION"
+                                    }
+                                }
+                            },
+                            "Products": {
+                                "EntitySet": "Products",
+                                "Actions": {
+                                    "toolid": {
+                                        "id": "toolidButton",
+                                        "text": "BOTAO",
+                                        "press": "funcao",
+                                        "requiresSelection": false,
+                                        "logicalAction": "REPLACE_WITH_LOGICAL_ACTION"
+                                    },
+                                    "global": {
+                                        "id": "globalButton",
+                                        "text": "butao global",
+                                        "press": "funcao2",
+                                        "global": true,
+                                        "logicalAction": "REPLACE_WITH_LOGICAL_ACTION"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "sap.ui.viewExtensions": {
+                    "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+                        "SmartFilterBarControlConfigurationExtension|Products": {
+                            "className": "sap.ui.core.Fragment",
+                            "fragmentName": "sap.ui5.odata.projectodata2.ext.fragments.filtro",
+                            "type": "XML"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.ui.generic.app": {
+        "_version": "1.3.0",
+        "settings": {
+            "forceGlobalRefresh": false,
+            "objectPageHeaderType": "Dynamic",
+            "considerAnalyticalParameters": true,
+            "showDraftToggle": false
+        },
+        "pages": {
+            "ListReport|Products": {
+                "entitySet": "Products",
+                "component": {
+                    "name": "sap.suite.ui.generic.template.ListReport",
+                    "list": true,
+                    "settings": {
+                        "smartVariantManagement": true,
+                        "isWorklist": true,
+                        "filterSettings": {
+                            "dateSettings": {
+                                "useDateRange": true
+                            }
+                        },
+                        "tableSettings": {
+                            "multiSelect": true,
+                            "type": "GridTable"
+                        },
+                        "dataLoadSettings": {
+                            "loadDataOnAppLaunch": "ifAnyFilterExist"
+                        }
+                    }
+                },
+                "pages": {
+                    "ObjectPage|Products": {
+                        "entitySet": "Products",
+                        "component": {
+                            "name": "sap.suite.ui.generic.template.ObjectPage",
+                            "settings": {
+                                "gridTable": true,
+                                "sections": {
+                                    "Category::com.sap.vocabularies.UI.v1.LineItem": {
+                                        "condensedTableLayout": false
+                                    }
+                                }
+                            }
+                        },
+                        "pages": {
+                            "ObjectPage|Category": {
+                                "navigationProperty": "Category",
+                                "entitySet": "Categories",
+                                "component": {
+                                    "name": "sap.suite.ui.generic.template.ObjectPage"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}
